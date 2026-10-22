@@ -1,4 +1,4 @@
-package com.example.spaSewaTaa.model;
+package com.example.spa_backend.model;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -6,6 +6,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.time.LocalTime;
+import java.util.List;
 
 @Data
 @NoArgsConstructor
@@ -16,6 +17,9 @@ public class Sucursal {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id_sucursal;
+
+    @Column
+    private String nombre;
 
     @Column
     private String direccion;
@@ -34,4 +38,7 @@ public class Sucursal {
 
     @Column
     private LocalTime hora_cierre;
+
+    @OneToMany(mappedBy = "sucursal", cascade = CascadeType.ALL)
+    private List<Terapeuta> terapeutas;
 }

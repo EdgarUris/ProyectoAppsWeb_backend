@@ -1,4 +1,4 @@
-package com.example.spaSewaTaa.model;
+package com.example.spa_backend.model;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -7,7 +7,6 @@ import lombok.NoArgsConstructor;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.util.List;
 
 @Data
 @NoArgsConstructor
@@ -20,17 +19,10 @@ public class Cliente {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id_cliente;
 
-    @Column(nullable = false)
-    private String nombre;
-
-    @Column(nullable = false, unique = true)
-    private String email;
-
-    @Column(nullable = false)
-    private String contrasenia;
-
-    @Column
-    private String telefono;
+    @OneToOne(fetch = FetchType.LAZY)
+    @MapsId
+    @JoinColumn(name = "id_usuario")
+    private Usuario usuario;
 
     @Column
     private LocalDateTime fecha_registro;
@@ -38,8 +30,9 @@ public class Cliente {
     @Column(nullable = false)
     LocalDate fecha_nacimiento;
 
-    @Column
-    private String notas_medicas;
+    @OneToOne
+    @JoinColumn(name = "id_nota")
+    private NotaMedica notasMedicas;
 
     @Column
     private boolean activo;

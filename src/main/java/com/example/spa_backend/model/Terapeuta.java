@@ -1,4 +1,4 @@
-package com.example.spaSewaTaa.model;
+package com.example.spa_backend.model;
 
 
 import jakarta.persistence.*;
@@ -7,6 +7,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.time.LocalDate;
+import java.util.List;
 
 @Data
 @NoArgsConstructor
@@ -19,8 +20,10 @@ public class Terapeuta {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id_terapeuta;
 
-    @Column(nullable = false)
-    private String nombre;
+    @OneToOne(fetch = FetchType.LAZY)
+    @MapsId //vincula la pk de esta entity a la fk de Usuario
+    @JoinColumn(name = "id_usuario")
+    private Usuario usuario;
 
     @ManyToOne
     @JoinColumn(name = "id_sucursal")
@@ -31,5 +34,15 @@ public class Terapeuta {
 
     @Column
     private boolean activo;
+
+    @ManyToMany
+    @JoinTable(
+            name = "terapeutas_servicios",
+            joinColumns = @JoinColumn(name = "id_terapeuta"),
+            inverseJoinColumns = @JoinColumn(name = "id_servicio")
+    )
+    private List<Servicio> servicios;
+
+
 
 }

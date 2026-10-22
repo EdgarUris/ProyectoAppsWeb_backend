@@ -1,4 +1,4 @@
-package com.example.spaSewaTaa.model;
+package com.example.spa_backend.model;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -18,9 +18,8 @@ public class HorarioTerapeuta {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id_horario_terapeuta;
 
-    //@OneToOne
-    //referencia a la llave foranea
-    //private Long id_sucursal;
+    @JoinColumn
+    private Sucursal sucursal;
 
     @Column(nullable = false)
     private String dias_trabajo;
@@ -30,5 +29,6 @@ public class HorarioTerapeuta {
 
     @Column
     private LocalTime hora_fin;
+
 
 }

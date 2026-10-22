@@ -1,11 +1,10 @@
-package com.example.spaSewaTaa.model;
+package com.example.spa_backend.model;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 @Data
@@ -31,10 +30,6 @@ public class Cita {
     private Terapeuta terapeuta;
 
     @ManyToOne
-    @JoinColumn(name = "id_sucursal", nullable = false)
-    private Sucursal sucursal;
-
-    @ManyToOne
     @JoinColumn(name = "id_sala", nullable = false)
     private Sala sala;
 
@@ -45,10 +40,11 @@ public class Cita {
     private LocalDateTime fecha_hora_fin;
 
     @Column
-    private String estado;
+    @Enumerated(EnumType.STRING)
+    private EstadoCita estado;
 
     @Column
-    private LocalDate fecha_creada;
+    private LocalDateTime fecha_creada;
 
     @Column
     private Double precio_total;

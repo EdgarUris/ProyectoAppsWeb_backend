@@ -1,10 +1,11 @@
-package com.example.spaSewaTaa.model;
-
+package com.example.spa_backend.model;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+
+import java.util.List;
 
 @Data
 @AllArgsConstructor
@@ -32,4 +33,9 @@ public class Servicio {
     @Column(nullable = false)
     private Double precio;
 
+    @Column
+    private String url_imagen;
+
+    @ManyToMany(mappedBy = "servicios")
+    private List<Terapeuta> terapeutas;
 }

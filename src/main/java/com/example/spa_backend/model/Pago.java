@@ -1,4 +1,4 @@
-package com.example.spaSewaTaa.model;
+package com.example.spa_backend.model;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
